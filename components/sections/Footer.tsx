@@ -2,7 +2,7 @@ import Link from "next/link";
 import { masterConfig } from "@/config/master";
 import { WorldTimeBadges } from "@/components/ui/WorldTimeBadges";
 import Image from "next/image";
-import { IconMail, IconPhone, IconMapPin } from "@tabler/icons-react";
+import { IconMail, IconPhone, IconMapPin, type IconProps } from "@tabler/icons-react";
 import { LinkedInIcon, InstagramIcon } from "@/components/icons/BrandIcons";
 import type { ComponentType } from "react";
 
@@ -12,7 +12,7 @@ export function Footer() {
     const socialEntries = Object.entries(masterConfig.contact.social) as Array<[SocialKey, string]>;
 
     // Map social keys to icons
-    const socialIcons: Record<SocialKey, ComponentType<{ className?: string }>> = {
+    const socialIcons: Record<SocialKey, ComponentType<any>> = {
         linkedin: LinkedInIcon,
         instagram: InstagramIcon,
     };
