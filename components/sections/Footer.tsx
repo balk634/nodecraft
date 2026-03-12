@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { masterConfig } from "@/config/master";
-import { WorldTimeBadges } from "@/components/ui/WorldTimeBadges";
 import Image from "next/image";
 import { IconMail, IconPhone, IconMapPin } from "@tabler/icons-react";
 import { LinkedInIcon, InstagramIcon } from "@/components/icons/BrandIcons";
 import type { ComponentType } from "react";
+import { WorldTimeBadgesLazy } from "@/components/ui/WorldTimeBadgesLazy";
 
 export function Footer() {
     const year = new Date().getFullYear();
@@ -109,7 +109,7 @@ export function Footer() {
                     </div>
 
                     <div className="w-full lg:w-auto">
-                        <WorldTimeBadges className="w-full" />
+                        <WorldTimeBadgesLazy className="w-full" />
                     </div>
                 </div>
             </div>

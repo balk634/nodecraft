@@ -7,6 +7,10 @@ import { IconX } from "@tabler/icons-react";
 export function CookieConsent() {
     const [show, setShow] = useState(false);
 
+    const notifyConsentChange = () => {
+        window.dispatchEvent(new Event("cookie-consent-updated"));
+    };
+
     useEffect(() => {
         const timeoutId = window.setTimeout(() => {
             setShow(!localStorage.getItem("cookie-consent"));
@@ -17,11 +21,13 @@ export function CookieConsent() {
 
     const accept = () => {
         localStorage.setItem("cookie-consent", "accepted");
+        notifyConsentChange();
         setShow(false);
     };
 
     const decline = () => {
         localStorage.setItem("cookie-consent", "declined");
+        notifyConsentChange();
         setShow(false);
     };
 

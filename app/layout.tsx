@@ -1,18 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
 import { Space_Grotesk, JetBrains_Mono, Raleway } from "next/font/google"; // Using Raleway as body font
 import "./globals.css";
 import { masterConfig } from "@/config/master";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
+import { ConsentAwareAnalytics } from "@/components/analytics/ConsentAwareAnalytics";
 
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
-import { CookieConsent } from "@/components/ui/CookieConsent";
-import { MicroInteractionEngine } from "@/components/ui/MicroInteractionEngine";
-import { SmoothScroll } from "@/components/ui/SmoothScroll";
-import { ScrollProgress } from "@/components/ui/ScrollProgress";
-import { NavigationTransitionManager } from "@/components/ui/NavigationTransitionManager";
+import { PerformanceEnhancements } from "@/components/ui/PerformanceEnhancements";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -120,27 +115,12 @@ export default function RootLayout({
         }
       >
         <JsonLd />
-        <BreadcrumbJsonLd />
-        {masterConfig.analytics?.googleAnalyticsId && (
-          <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${masterConfig.analytics.googleAnalyticsId}`}
-              strategy="afterInteractive"
-            />
-            <Script id="google-analytics" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${masterConfig.analytics.googleAnalyticsId}');
-              `}
-            </Script>
-          </>
-        )}
-        <SmoothScroll enabled={masterConfig.ui.motion.smoothScroll} />
-        <NavigationTransitionManager />
-        <MicroInteractionEngine enabled={masterConfig.ui.microInteractions.enabled} />
-        {masterConfig.ui.motion.scrollProgress ? <ScrollProgress /> : null}
+        <ConsentAwareAnalytics measurementId={masterConfig.analytics?.googleAnalyticsId} />
+        <PerformanceEnhancements
+          enableSmoothScroll={masterConfig.ui.motion.smoothScroll}
+          enableMicroInteractions={masterConfig.ui.microInteractions.enabled}
+          enableScrollProgress={masterConfig.ui.motion.scrollProgress}
+        />
         {masterConfig.ui.pattern.enabled ? (
           <div
             aria-hidden
@@ -152,8 +132,6 @@ export default function RootLayout({
           {children}
           <Footer />
         </div>
-        <CookieConsent />
-
       </body>
     </html>
   );

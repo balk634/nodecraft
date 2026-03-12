@@ -10,6 +10,7 @@ import { IconArrowRight, IconStack2, IconArrowDown } from "@tabler/icons-react";
 export function Hero() {
     const { hero } = masterConfig.sections;
     const heroImageFile = masterConfig.ui.heroImages.home || hero.imageSrc || "hero1.jpg";
+    const heroImageMaxWidth = hero.visualDimensions?.maxWidth || 500;
     const heroSrc = (() => {
         const normalized = heroImageFile.trim().replace(/^\/(https?:\/\/)/i, "$1");
         if (/^https?:\/\//i.test(normalized)) return normalized;
@@ -100,7 +101,7 @@ export function Hero() {
                     <div
                         className="relative w-full max-w-[280px] sm:max-w-[400px] lg:max-w-none lg:ml-auto"
                         style={{
-                            maxWidth: `${hero.visualDimensions?.maxWidth || 500}px`,
+                            maxWidth: `clamp(260px, 72vw, ${heroImageMaxWidth}px)`,
                             aspectRatio: hero.visualDimensions?.aspectRatio || "1/1",
                         }}
                     >
@@ -112,7 +113,8 @@ export function Hero() {
                             fill
                             className={`object-cover z-10 ${hero.grayscale ? "grayscale" : ""}`}
                             priority
-                            sizes="(max-width: 1024px) 100vw, 500px"
+                            quality={68}
+                            sizes="(max-width: 639px) 72vw, (max-width: 1023px) 62vw, 500px"
                         />
                     </div>
                 </motion.div>

@@ -6,7 +6,7 @@ import type { ComponentType } from "react";
 import {
     IconSearch, IconPalette, IconRocket, IconTrendingUp, type IconProps
 } from "@tabler/icons-react";
-import { BoxPattern } from "@/components/ui/BoxPattern";
+import { BoxPatternServer } from "@/components/ui/BoxPatternServer";
 
 const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
@@ -88,7 +88,7 @@ export function OurProcess() {
                                         whileHover={{ y: -2, transition: { duration: 0.18 } }}
                                         className="relative border border-grid/15 bg-white p-7 md:p-8 flex flex-col h-full group cursor-default hover:border-primary/30 hover:bg-paper/40 transition-colors duration-300"
                                     >
-                                        <BoxPattern />
+                                        <BoxPatternServer />
                                         <div className="font-mono text-5xl font-bold tracking-tight text-ink mb-6">
                                             {step.number}
                                         </div>
